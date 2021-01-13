@@ -19,3 +19,35 @@ type=string
 variable "subnetaddress"{
 
 }
+
+#nsg variable
+variable "nsgname"{
+type=string
+}
+variable "nsgrulename"{
+type=string
+}
+variable "priority"{
+
+}
+variable "direction"{
+    
+}
+variable "access"{
+    
+}
+variable "protocol"{
+    
+}
+variable "sourceport"{
+    
+}
+variable "destinationport"{
+    
+}
+variable "sourceaddress"{
+    
+}
+variable "destinationaddress"{
+    
+}
