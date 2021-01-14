@@ -7,12 +7,12 @@ resource "azurerm_virtual_network" "main" {
 }
 
 resource "azurerm_subnet" "internal" {
-  name                 = "${var.subnetname}"
+  name                 = "${var.subnet_name[count.index]}"
+  address_prefix                = "${var.address_prefix[count.index]}"
+  count  = "${length(var.subnet_name)}"
   resource_group_name  = "${var.name}"
   virtual_network_name = "${azurerm_virtual_network.main.name}"
-  address_prefix       = "${var.subnetaddress}"
 }
-
 
 #nsg
 resource "azurerm_network_security_group" "main" {
@@ -24,6 +24,7 @@ resource "azurerm_network_security_group" "main" {
 
 resource "azurerm_network_security_rule" "main" {
   name                        = "${var.nsgrulename}"
+  
   priority                    = "${var.priority}"
   direction                   = "${var.direction}"
   access                      = "${var.access}"
@@ -34,4 +35,10 @@ resource "azurerm_network_security_rule" "main" {
   destination_address_prefix  = "${var.destinationaddress}"
   resource_group_name         = "${var.name}"
   network_security_group_name = "${azurerm_network_security_group.main.name}"
+}
+
+resource "azurerm_subnet_network_security_group_association" "main" {
+  count  = "${length(var.subnet_name)}"
+  subnet_id                 = "${azurerm_subnet.internal[count.index].id}"
+  network_security_group_id = "${azurerm_network_security_group.main.id}"
 }

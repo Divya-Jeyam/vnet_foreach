@@ -9,10 +9,8 @@ module "vnet"{
  name = "${module.RG.mod_rg}"
  vnetname= "${var.vnetname}"
  address ="${var.address}"
- subnetname="${var.subnetname}"
- subnetaddress="${var.subnetaddress}"
-
-
+ subnet_name = "${var.subnet_name}"
+ address_prefix = "${var.address_prefix}"
  nsgname            = "${var.nsgname}"
  nsgrulename        = "${var.nsgrulename}"
  priority           = "${var.priority}"
