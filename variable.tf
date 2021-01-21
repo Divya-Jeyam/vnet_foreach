@@ -13,13 +13,7 @@ type=string
 variable "address"{
 type=list(string)
 }
-variable "subnetdetails"{
 
-}
-variable "nsg" {
-
-}
-/*
 variable "subnet_name" {
   type = "list"
 }
@@ -29,12 +23,24 @@ variable "address_prefix" {
 #nsg variable
 variable "nsgname"{
 type= "list"
-}*/
+}
 variable "nsgrulename1"{
 type=string
 }
 
+variable "nsgrulename2"{
+type=string
+}
+variable "nsgrulename3"{
+type=string
+}
 variable "priority1"{
+
+}
+variable "priority2"{
+
+}
+variable "priority3"{
 
 }
 variable "direction"{
@@ -50,6 +56,12 @@ variable "sourceport"{
     
 }
 variable "destinationport1"{
+    
+}
+variable "destinationport2"{
+    
+}
+variable "destinationport3"{
     
 }
 variable "sourceaddress"{
