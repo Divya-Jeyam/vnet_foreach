@@ -6,18 +6,33 @@ resource "azurerm_virtual_network" "main" {
   resource_group_name = "${var.name}"
 }
 
-resource "azurerm_subnet" "internal" {
-  name                 = "${var.subnet_name[count.index]}"
-  address_prefix                = "${var.address_prefix[count.index]}"
+/*resource "azurerm_subnet" "internal" {
+  name                 = "${var.subnet_name[.index]}"
+  address_prefix                = "${var.addresscount_prefix[count.index]}"
   count  = "${length(var.subnet_name)}"
   resource_group_name  = "${var.name}"
   virtual_network_name = "${azurerm_virtual_network.main.name}"
-}
+}*/
 
+resource "azurerm_subnet" "internal" {
+  for_each = var.subnetdetails
+  name                 = each.value.subnet_name
+  address_prefixes                = [each.value.address_prefix]
+  resource_group_name  = "${var.name}"
+  virtual_network_name = "${azurerm_virtual_network.main.name}"
+}
+/*
 #nsg
 resource "azurerm_network_security_group" "main" {
   name                = "${var.nsgname[count.index]}"
   count = "${length(var.nsgname)}"
+  location            = "${var.location}"
+  resource_group_name = "${var.name}"
+}
+*/
+resource "azurerm_network_security_group" "main" {
+  for_each = var.nsg
+  name                = each.value.nsgname
   location            = "${var.location}"
   resource_group_name = "${var.name}"
 }
@@ -34,10 +49,16 @@ resource "azurerm_network_security_rule" "nsg1" {
   source_address_prefix       = "${var.sourceaddress}"
   destination_address_prefix  = "${var.destinationaddress}"
   resource_group_name         = "${var.name}"
-  count  = "${length(var.nsgname)}"
-  network_security_group_name = "${azurerm_network_security_group.main[count.index].name}"
+  for_each = var.nsg
+  network_security_group_name = "${azurerm_network_security_group.main[each.key].name}"
 }
 
+resource "azurerm_subnet_network_security_group_association" "main" {
+  for_each = var.nsg
+  subnet_id                 = azurerm_subnet.internal[each.key].id
+  network_security_group_id = azurerm_network_security_group.main[each.key].id
+}
+/*
 resource "azurerm_network_security_rule" "nsg2" {
   name                        = "${var.nsgrulename2}" 
   priority                    = "${var.priority2}"
@@ -72,4 +93,4 @@ resource "azurerm_subnet_network_security_group_association" "main" {
   count  = length(var.nsgname)
   subnet_id                 = element(azurerm_subnet.internal.*.id, (count.index)+2)
   network_security_group_id = element(azurerm_network_security_group.main.*.id, count.index)
-}
+}*/
