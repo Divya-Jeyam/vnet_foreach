@@ -28,12 +28,24 @@ variable "address_prefix" {
 }
 #nsg variable
 variable "nsgname"{
+type= "list"
+}
+variable "nsgrulename1"{
 type=string
 }
-variable "nsgrulename"{
+variable "nsgrulename2"{
 type=string
 }
-variable "priority"{
+variable "nsgrulename3"{
+type=string
+}
+variable "priority1"{
+
+}
+variable "priority2"{
+
+}
+variable "priority3"{
 
 }
 variable "direction"{
@@ -48,7 +60,13 @@ variable "protocol"{
 variable "sourceport"{
     
 }
-variable "destinationport"{
+variable "destinationport1"{
+    
+}
+variable "destinationport2"{
+    
+}
+variable "destinationport3"{
     
 }
 variable "sourceaddress"{

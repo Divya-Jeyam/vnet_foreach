@@ -16,13 +16,25 @@ variable "location"{
 } 
 
 variable "nsgname"{
-    type = string
+    type = "list"
 }
 
-variable "nsgrulename"{
+variable "nsgrulename1"{
+ type = string
+}
+variable "nsgrulename2"{
+ type = string
+}
+variable "nsgrulename3"{
+ type = string
+}
+variable "priority1"{
 
 }
-variable "priority"{
+variable "priority2"{
+
+}
+variable "priority3"{
 
 }
 variable "direction"{
@@ -37,7 +49,13 @@ variable "protocol"{
 variable "sourceport"{
 
 }
-variable "destinationport"{
+variable "destinationport1"{
+
+}
+variable "destinationport2"{
+
+}
+variable "destinationport3"{
 
 }
 variable "sourceaddress"{
