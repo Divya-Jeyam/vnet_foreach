@@ -12,5 +12,6 @@ value="${azurerm_subnet.internal.address_prefix}"
 }
 output "subnet_id"{
 value="${azurerm_subnet.internal.id}"
+value = "${for s in azurerm_subnet.internal.id : s.id => s}"
 }
 */

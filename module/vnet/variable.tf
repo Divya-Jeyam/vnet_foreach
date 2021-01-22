@@ -1,19 +1,16 @@
+variable "name"{
+}
+variable "location"{
+} 
 variable "vnetname"{
 type=string
 }
 variable "address"{
 type=list(string)
 }
-variable "subnet_name" {
-  type = "list"
- }
-variable "address_prefix" {
-    type = "list"
+variable "subnet_details" {
+ 
 }
-variable "name"{
-}
-variable "location"{
-} 
 variable "nsgname"{
     
 }

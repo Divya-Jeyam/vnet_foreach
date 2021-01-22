@@ -14,15 +14,11 @@ variable "address"{
 type=list(string)
 }
 
-variable "subnet_name" {
-  type = "list"
-}
-variable "address_prefix" {
-  type = "list"
+variable "subnet_details" {
+
 }
 #nsg variable
 variable "nsgname"{
-type= "list"
 }
 variable "nsgrulename1"{
 type=string

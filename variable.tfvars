@@ -1,13 +1,36 @@
 name = "demoRG"
 location = "East Us"
-
+#vnet
 vnetname = "demovnet"
 address = ["10.0.0.0/16"]
- 
- subnet_name = ["subnet-A", "subnet-B", "subnet-C", "subnet-D"]
- address_prefix = ["10.0.1.0/24", "10.0.2.0/24", "10.0.3.0/24", "10.0.4.0/24"]
+#subnet
+subnet_details= {
+    A = {
+      address_prefix      = "10.0.1.0/24"
+      subnet_name     = "subnet-A"
+    },
+    B = {
+      address_prefix   = "10.0.2.0/24"
+      subnet_name     = "subnet-B"
+    },
+    C = {
+      address_prefix      = "10.0.3.0/24"
+      subnet_name     = "subnet-C"
+    },
+    D = {
+      address_prefix      = "10.0.4.0/24"
+      subnet_name     = "subnet-D"
+    }
+ }
 #nsg variable
-nsgname            = ["nsg-subnetC", "nsg-subnetD"]
+nsgname       = {
+     A = {
+        nsgname   = "nsg_subnet-C"
+    },
+    B = {
+      nsgname     = "nsg_subnet-D"
+    }
+}
 nsgrulename1        = "ssh"
 nsgrulename2        = "rdp"
 nsgrulename3        = "http"
